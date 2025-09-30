@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <title>Application Form</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no">
+  
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css  " rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css  " rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-green: #10b981;
+      --primary-green-dark: #059669;
+      --primary-green-light: #34d399;
+      --secondary-green: #6ee7b7;
+      --accent-green: #a7f3d0;
+      --success-green: #065f46;
+      --bg-green: #ecfdf5;
+      --border-green: #d1fae5;
+      --text-dark: #1f2937;
+      --text-muted: #6b7280;
+      --text-light: #9ca3af;
+      --white: #ffffff;
+      --shadow-light: rgba(16, 185, 129, 0.1);
+      --shadow-medium: rgba(16, 185, 129, 0.2);
+      --gradient-primary: linear-gradient(135deg, var(--primary-green) 0%, var(--primary-green-dark) 100%);
+      --gradient-bg: linear-gradient(135deg, #f0fdf4 0%, #ecfdf5 100%);
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--gradient-bg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      color: var(--text-dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(16, 185, 129, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(52, 211, 153, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(167, 243, 208, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .main-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--border-green);
+      border-radius: 24px;
+      box-shadow: 
+        0 20px 25px -5px rgba(0, 0, 0, 0.1),
+        0 10px 10px -5px rgba(0, 0, 0, 0.04),
+        0 0 0 1px var(--shadow-light);
+      padding: 3rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .form-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--gradient-primary);
+    }
+    
+    .header-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    
+    .form-title {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    
+    .form-subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin-bottom: 0;
+    }
+    
+    .icon-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 25px var(--shadow-medium);
+    }
+    
+    .icon-badge i {
+      font-size: 2rem;
+      color: var(--white);
+    }
+    
+    .form-section {
+      margin-bottom: 2rem;
+    }
+    
+    .section-title {
+      color: var(--text-dark);
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--accent-green);
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 60px;
+      height: 2px;
+      background: var(--primary-green);
+    }
+    
+    .form-label {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .form-label i {
+      color: var(--primary-green);
+      font-size: 1rem;
+    }
+    
+    .form-control, .form-select {
+      border: 2px solid #e5e7eb;
+      border-radius: 12px;
+      padding: 0.875rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background-color: var(--white);
+      color: var(--text-dark);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    .form-control:focus, .form-select:focus {
+      border-color: var(--primary-green);
+      box-shadow: 
+        0 0 0 3px var(--shadow-light),
+        0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      background-color: var(--white);
+      transform: translateY(-1px);
+    }
+    
+    .form-control.is-invalid, .form-select.is-invalid {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1);
+    }
+    
+    .form-control.is-valid, .form-select.is-valid {
+      border-color: var(--primary-green);
+      background-color: var(--bg-green);
+      box-shadow: 0 0 0 3px var(--shadow-light);
+    }
+    
+    .input-group-text {
+      background: var(--accent-green);
+      border: 2px solid #e5e7eb;
+      border-right: none;
+      color: var(--success-green);
+      font-weight: 600;
+      border-radius: 12px 0 0 12px;
+    }
+    
+    .input-group .form-control {
+      border-left: none;
+      border-radius: 0 12px 12px 0;
+    }
+    
+    .input-group:focus-within .input-group-text {
+      border-color: var(--primary-green);
+      background: var(--secondary-green);
+    }
+    
+    .btn-primary {
+      background: var(--gradient-primary);
+      border: none;
+      border-radius: 16px;
+      padding: 1rem 3rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: 
+        0 10px 15px -3px var(--shadow-medium),
+        0 4px 6px -2px var(--shadow-light);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(135deg, var(--primary-green-dark) 0%, #047857 100%);
+      transform: translateY(-2px);
+      box-shadow: 
+        0 20px 25px -5px var(--shadow-medium),
+        0 10px 10px -5px var(--shadow-light);
+    }
+    
+    .btn-primary:hover::before {
+      left: 100%;
+    }
+    
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+    
+    .btn-primary:disabled {
+      background: var(--text-light);
+      transform: none;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+    
+    .alert {
+      border: none;
+      border-radius: 16px;
+      font-weight: 500;
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .alert-success {
+      background: var(--bg-green);
+      color: var(--success-green);
+      border-left: 4px solid var(--primary-green);
+    }
+    
+    .alert-danger {
+      background: #fef2f2;
+      color: #991b1b;
+      border-left: 4px solid #ef4444;
+    }
+    
+    .required-asterisk {
+      color: #ef4444;
+      margin-left: 2px;
+      font-weight: 600;
+    }
+    
+    .spinner-border-sm {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-right: 0.5rem;
+      border-width: 2px;
+    }
+    
+    .invalid-feedback {
+      font-weight: 500;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+    
+    .valid-feedback {
+      color: var(--success-green);
+      font-weight: 500;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+    }
+    
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 24px;
+      z-index: 1000;
+    }
+    
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--accent-green);
+      border-top: 4px solid var(--primary-green);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .form-submitted {
+      animation: formSuccess 0.6s ease-out forwards;
+    }
+    
+    @keyframes formSuccess {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.02); }
+      100% { transform: scale(1); }
+    }
+    
+    /* NEW STYLES FOR SURVEY SECTION */
+    .survey-question-container {
+        background-color: var(--white); /* Reset to white background */
+        border: 1px solid var(--border-green); /* Keep light green border */
+        border-radius: 12px; /* Keep consistent border radius */
+        padding: 1.5rem; /* Keep padding */
+        margin-bottom: 1.5rem; /* Keep margin */
+    }
+    
+    .survey-question-label {
+        font-weight: 600;
+        color: var(--text-dark);
+        margin-bottom: 1rem;
+        display: block;
+        font-size: 1rem;
+    }
+    
+    .survey-question-label i {
+        color: var(--primary-green); /* Make the icon green */
+    }
+    
+    .form-check {
+        padding-top: 0.25rem;
+        padding-bottom: 0.25rem;
+        margin-bottom: 0.5rem; /* Add space between options */
+        display: flex; /* Use flexbox for alignment */
+        align-items: center; /* Vertically center input and label */
+    }
+    
+    .form-check-input {
+        margin-right: 0.75rem; /* Add space between input and label */
+        flex-shrink: 0; /* Prevent input from shrinking */
+        /* Remove all custom styling for size/border - use Bootstrap defaults */
+    }
+    
+    .form-check-label {
+        font-weight: 500;
+        color: var(--text-dark); /* Default color */
+        cursor: pointer;
+        transition: color 0.2s ease;
+        flex-grow: 1; /* Allow label to take remaining space */
+    }
+    
+    .form-check-input:focus ~ .form-check-label {
+        color: var(--text-dark); /* Reset color on focus */
+    }
+    
+    .form-check-input:checked ~ .form-check-label {
+        color: var(--primary-green-dark); /* Green color when checked */
+        font-weight: 600;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .main-container {
+        padding: 1rem 0.75rem;
+      }
+      
+      .form-card {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+        margin-bottom: 1rem;
+      }
+      
+      .form-title {
+        font-size: 2rem;
+      }
+      
+      .form-subtitle {
+        font-size: 1rem;
+      }
+      
+      .icon-badge {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 1rem;
+      }
+      
+      .icon-badge i {
+        font-size: 1.5rem;
+      }
+      
+      .btn-primary {
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+        width: 100%;
+      }
+      
+      .form-control, .form-select {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 1rem;
+      }
+      
+      /* Stack checkboxes/radios on smaller screens */
+      .form-check {
+        margin-bottom: 0.75rem;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .form-card {
+        padding: 1.5rem 1rem;
+        border-radius: 16px;
+      }
+      
+      .form-title {
+        font-size: 1.75rem;
+      }
+      
+      .header-section {
+        margin-bottom: 2rem;
+      }
+      
+      .icon-badge {
+        width: 50px;
+        height: 50px;
+      }
+      
+      .icon-badge i {
+        font-size: 1.25rem;
+      }
+    }
+    
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-dark: #f9fafb;
+        --text-muted: #d1d5db;
+        --white: #1f2937;
+        --bg-green: #064e3b;
+        --border-green: #065f46;
+      }
+      
+      body {
+        background: linear-gradient(135deg, #111827 0%, #1f2937 100%);
+      }
+      
+      .form-card {
+        background: #374151;
+        border-color: #4b5563;
+      }
+      
+      .form-control, .form-select {
+        background-color: #4b5563;
+        border-color: #6b7280;
+        color: #f9fafb;
+      }
+      
+      .form-control:focus, .form-select:focus {
+        background-color: #4b5563;
+      }
+    }
+    
+    .was-validated .form-control:invalid,
+    .was-validated .form-select:invalid {
+      border-color: #ef4444;
+      background-color: #fef2f2;
+    }
+    
+    .was-validated .form-control:valid,
+    .was-validated .form-select:valid {
+      border-color: var(--primary-green);
+      background-color: var(--bg-green);
+    }
+  </style>
+</head>
+<body>
+  <div class="main-container">
+    <div class="form-card">
+      <div class="header-section">
+        <div class="icon-badge">
+          <i class="bi bi-person-fill-add"></i>
+        </div>
+        <h1 class="form-title">Application Form</h1>
+        <p class="form-subtitle">Join our team - Fill out all required fields to submit your application</p>
+      </div>
+      
+      <form id="applicationForm" novalidate>
+        <div class="form-section">
+          <h3 class="section-title">
+            <i class="bi bi-person-circle me-2"></i>
+            Personal Information
+          </h3>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <label for="name" class="form-label">
+                <i class="bi bi-person"></i>
+                Full Name<span class="required-asterisk">*</span>
+              </label>
+              <input type="text" class="form-control" id="name" name="name" required 
+                     autocomplete="name" placeholder="Enter your full name">
+              <div class="invalid-feedback">Please provide your full name.</div>
+              <div class="valid-feedback">Looks good!</div>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="mobile" class="form-label">
+                <i class="bi bi-phone"></i>
+                Mobile Number<span class="required-asterisk">*</span>
+              </label>
+              <div class="input-group">
+                <span class="input-group-text">+216</span>
+                <input type="tel" class="form-control" id="mobile" name="mobile" required 
+                       autocomplete="tel" placeholder="10 digit number" maxlength="10" pattern="[0-9]{10}">
+              </div>
+              <div class="invalid-feedback">Please provide a valid 10-digit mobile number.</div>
+              <div class="valid-feedback">Mobile number is valid!</div>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="email" class="form-label">
+                <i class="bi bi-envelope"></i>
+                Email Address<span class="required-asterisk">*</span>
+              </label>
+              <input type="email" class="form-control" id="email" name="email" required 
+                     autocomplete="email" placeholder="user@example.com">
+              <div class="invalid-feedback">Please provide a valid email address.</div>
+              <div class="valid-feedback">Email looks great!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">
+            <i class="bi bi-card-text me-2"></i>
+            Personal Details
+          </h3>
+          <div class="row g-4">
+            <div class="col-md-4">
+              <label for="dob" class="form-label">
+                <i class="bi bi-calendar"></i>
+                Date of Birth<span class="required-asterisk">*</span>
+              </label>
+              <input type="date" class="form-control" id="dob" name="dob" required autocomplete="bday">
+              <div class="invalid-feedback">Please select your date of birth.</div>
+              <div class="valid-feedback">Date of birth confirmed!</div>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="gender" class="form-label">
+                <i class="bi bi-person-badge"></i>
+                Gender<span class="required-asterisk">*</span>
+              </label>
+              <select class="form-select" id="gender" name="gender" required autocomplete="sex">
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="invalid-feedback">Please select your gender.</div>
+              <div class="valid-feedback">Gender selected!</div>
+            </div>
+            
+            <div class="col-md-4">
+              <label for="graduation" class="form-label">
+                <i class="bi bi-mortarboard"></i>
+                Education Level<span class="required-asterisk">*</span>
+              </label>
+              <select class="form-select" id="graduation" name="graduation" required autocomplete="education">
+                <option value="">Select Education Level</option>
+                <option value="10th Pass out">10th Pass</option>
+                <option value="Intermediate">12th/Intermediate</option>
+                <option value="Degree">Graduate Degree</option>
+                <option value="Post Graduate">Post Graduate</option>
+                <option value="Post Graduate 2">Post Graduate 2</option>
+              </select>
+              <div class="invalid-feedback">Please select your education level.</div>
+              <div class="valid-feedback">Education level confirmed!</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h3 class="section-title">
+            <i class="bi bi-activity me-2"></i>
+             Stretch & Mobility Survey
+          </h3>
+          <p class="text-muted small mb-3">Please answer the following questions to help us understand your flexibility and mobility needs.</p>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label for="sm_experience" class="survey-question-label">
+                    <i class="bi bi-people me-2"></i>
+                    Question 1: What is your current experience level with stretching and mobility work?
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_experience" id="sm_exp_beginner" value="Complete beginner (never done structured stretching)">
+                    <label class="form-check-label" for="sm_exp_beginner">Complete beginner (never done structured stretching)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_experience" id="sm_exp_occasional" value="Beginner (occasionally stretch, but no regular routine)">
+                    <label class="form-check-label" for="sm_exp_occasional">Beginner (occasionally stretch, but no regular routine)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_experience" id="sm_exp_regular" value="Intermediate (stretch regularly, 2-3 times per week)">
+                    <label class="form-check-label" for="sm_exp_regular">Intermediate (stretch regularly, 2-3 times per week)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_experience" id="sm_exp_daily" value="Advanced (daily stretching/mobility practice)">
+                    <label class="form-check-label" for="sm_exp_daily">Advanced (daily stretching/mobility practice)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_experience" id="sm_exp_instructor" value="Professional/Instructor level">
+                    <label class="form-check-label" for="sm_exp_instructor">Professional/Instructor level</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label for="sm_hours_sitting" class="survey-question-label">
+                    <i class="bi bi-clock me-2"></i>
+                    Question 2: How many hours per day do you spend sitting?
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_hours_sitting" id="sm_sit_less2" value="Less than 2 hours">
+                    <label class="form-check-label" for="sm_sit_less2">Less than 2 hours</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_hours_sitting" id="sm_sit_24" value="2-4 hours">
+                    <label class="form-check-label" for="sm_sit_24">2-4 hours</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_hours_sitting" id="sm_sit_46" value="4-6 hours">
+                    <label class="form-check-label" for="sm_sit_46">4-6 hours</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_hours_sitting" id="sm_sit_68" value="6-8 hours">
+                    <label class="form-check-label" for="sm_sit_68">6-8 hours</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_hours_sitting" id="sm_sit_more8" value="More than 8 hours">
+                    <label class="form-check-label" for="sm_sit_more8">More than 8 hours</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label class="survey-question-label">
+                    <i class="bi bi-geo me-2"></i>
+                    Question 3: Which areas of your body feel the most stiff or restricted? 
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_body_areas" id="sm_area_neck" value="Neck and shoulders">
+                    <label class="form-check-label" for="sm_area_neck">Neck and shoulders</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_body_areas" id="sm_area_upperback" value="Upper back">
+                    <label class="form-check-label" for="sm_area_upperback">Upper back</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_body_areas" id="sm_area_lowerback" value="Lower back">
+                    <label class="form-check-label" for="sm_area_lowerback">Lower back</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_body_areas" id="sm_area_hips" value="Hips and hip flexors">
+                    <label class="form-check-label" for="sm_area_hips">Hips and hip flexors</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_body_areas" id="sm_area_hamstrings" value="Hamstrings">
+                    <label class="form-check-label" for="sm_area_hamstrings">Hamstrings</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_body_areas" id="sm_area_calves" value="Calves and ankles">
+                    <label class="form-check-label" for="sm_area_calves">Calves and ankles</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_body_areas" id="sm_area_wrists" value="Wrists and forearms">
+                    <label class="form-check-label" for="sm_area_wrists">Wrists and forearms</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_body_areas" id="sm_area_none" value="None - I feel generally flexible">
+                    <label class="form-check-label" for="sm_area_none">None - I feel generally flexible</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label for="sm_primary_goal" class="survey-question-label">
+                    <i class="bi bi-bullseye me-2"></i>
+                    Question 4: What is your primary goal for improving flexibility and mobility?
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_primary_goal" id="sm_goal_pain" value="Reduce pain and stiffness">
+                    <label class="form-check-label" for="sm_goal_pain">Reduce pain and stiffness</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_primary_goal" id="sm_goal_performance" value="Improve athletic performance">
+                    <label class="form-check-label" for="sm_goal_performance">Improve athletic performance</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_primary_goal" id="sm_goal_injury" value="Prevent injuries">
+                    <label class="form-check-label" for="sm_goal_injury">Prevent injuries</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_primary_goal" id="sm_goal_posture" value="Better posture">
+                    <label class="form-check-label" for="sm_goal_posture">Better posture</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_primary_goal" id="sm_goal_motion" value="Increase range of motion for daily activities">
+                    <label class="form-check-label" for="sm_goal_motion">Increase range of motion for daily activities</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_primary_goal" id="sm_goal_recovery" value="Recovery from injury">
+                    <label class="form-check-label" for="sm_goal_recovery">Recovery from injury</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_primary_goal" id="sm_goal_wellness" value="General wellness and relaxation">
+                    <label class="form-check-label" for="sm_goal_wellness">General wellness and relaxation</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label class="survey-question-label">
+                    <i class="bi bi-dumbbell me-2"></i>
+                    Question 5: Do you currently participate in any fitness activities? 
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_gym" value="Gym workouts (strength training)">
+                    <label class="form-check-label" for="sm_fitness_gym">Gym workouts (strength training)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_running" value="Running or jogging">
+                    <label class="form-check-label" for="sm_fitness_running">Running or jogging</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_yoga" value="Yoga or Pilates">
+                    <label class="form-check-label" for="sm_fitness_yoga">Yoga or Pilates</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_sports" value="Sports (team or individual)">
+                    <label class="form-check-label" for="sm_fitness_sports">Sports (team or individual)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_martial" value="Martial arts">
+                    <label class="form-check-label" for="sm_fitness_martial">Martial arts</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_swimming" value="Swimming">
+                    <label class="form-check-label" for="sm_fitness_swimming">Swimming</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_cycling" value="Cycling">
+                    <label class="form-check-label" for="sm_fitness_cycling">Cycling</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_dancing" value="Dancing">
+                    <label class="form-check-label" for="sm_fitness_dancing">Dancing</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_fitness_activities" id="sm_fitness_none" value="No regular fitness activities">
+                    <label class="form-check-label" for="sm_fitness_none">No regular fitness activities</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label class="survey-question-label">
+                    <i class="bi bi-exclamation-triangle me-2"></i>
+                    Question 6: Have you experienced any of the following in the past 6 months? 
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_experienced_issues" id="sm_issue_back" value="Chronic back pain">
+                    <label class="form-check-label" for="sm_issue_back">Chronic back pain</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_experienced_issues" id="sm_issue_hipflex" value="Tight hip flexors">
+                    <label class="form-check-label" for="sm_issue_hipflex">Tight hip flexors</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_experienced_issues" id="sm_issue_shoulder" value="Shoulder tension or pain">
+                    <label class="form-check-label" for="sm_issue_shoulder">Shoulder tension or pain</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_experienced_issues" id="sm_issue_motion" value="Limited range of motion in joints">
+                    <label class="form-check-label" for="sm_issue_motion">Limited range of motion in joints</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_experienced_issues" id="sm_issue_strain" value="Muscle strains or pulls">
+                    <label class="form-check-label" for="sm_issue_strain">Muscle strains or pulls</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_experienced_issues" id="sm_issue_toes" value="Difficulty touching toes">
+                    <label class="form-check-label" for="sm_issue_toes">Difficulty touching toes</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_experienced_issues" id="sm_issue_stiff" value="Stiffness after sitting or sleeping">
+                    <label class="form-check-label" for="sm_issue_stiff">Stiffness after sitting or sleeping</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_experienced_issues" id="sm_issue_none" value="None of the above">
+                    <label class="form-check-label" for="sm_issue_none">None of the above</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label for="sm_time_per_session" class="survey-question-label">
+                    <i class="bi bi-stopwatch me-2"></i>
+                    Question 7: How much time can you realistically dedicate to stretching/mobility work per session?
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_time_per_session" id="sm_time_510" value="5-10 minutes">
+                    <label class="form-check-label" for="sm_time_510">5-10 min</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_time_per_session" id="sm_time_1015" value="10-15 minutes">
+                    <label class="form-check-label" for="sm_time_1015">10-15 min</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_time_per_session" id="sm_time_1530" value="15-30 minutes">
+                    <label class="form-check-label" for="sm_time_1530">15-30 min</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_time_per_session" id="sm_time_3045" value="30-45 minutes">
+                    <label class="form-check-label" for="sm_time_3045">30-45 min</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_time_per_session" id="sm_time_4560" value="45-60 minutes">
+                    <label class="form-check-label" for="sm_time_4560">45-60 min</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_time_per_session" id="sm_time_more60" value="More than 60 minutes">
+                    <label class="form-check-label" for="sm_time_more60">> 60 min</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label class="survey-question-label">
+                    <i class="bi bi-x-circle me-2"></i>
+                    Question 8: What prevents you from stretching more regularly? 
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_barriers" id="sm_barrier_time" value="Lack of time">
+                    <label class="form-check-label" for="sm_barrier_time">Lack of time</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_barriers" id="sm_barrier_know" value="Don't know proper techniques">
+                    <label class="form-check-label" for="sm_barrier_know">Don't know proper techniques</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_barriers" id="sm_barrier_boring" value="Find it boring">
+                    <label class="form-check-label" for="sm_barrier_boring">Find it boring</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_barriers" id="sm_barrier_results" value="Don't see immediate results">
+                    <label class="form-check-label" for="sm_barrier_results">Don't see immediate results</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_barriers" id="sm_barrier_routine" value="Don't have a structured routine">
+                    <label class="form-check-label" for="sm_barrier_routine">Don't have a structured routine</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_barriers" id="sm_barrier_unsure" value="Unsure what stretches to do">
+                    <label class="form-check-label" for="sm_barrier_unsure">Unsure what stretches to do</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label class="survey-question-label">
+                    <i class="bi bi-book me-2"></i>
+                    Question 9: What type of stretching content would be most helpful to you? 
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_morning" value="Quick morning routines (5-10 min)">
+                    <label class="form-check-label" for="sm_content_morning">Quick morning routines (5-10 min)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_pre" value="Pre-workout warm-ups">
+                    <label class="form-check-label" for="sm_content_pre">Pre-workout warm-ups</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_post" value="Post-workout cool-downs">
+                    <label class="form-check-label" for="sm_content_post">Post-workout cool-downs</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_desk" value="Desk stretches for work breaks">
+                    <label class="form-check-label" for="sm_content_desk">Desk stretches for work breaks</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_evening" value="Evening relaxation routines">
+                    <label class="form-check-label" for="sm_content_evening">Evening relaxation routines</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_targeted" value="Targeted stretches for specific problem areas">
+                    <label class="form-check-label" for="sm_content_targeted">Targeted stretches for specific problem areas</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_prog" value="Progressive programs for increasing flexibility">
+                    <label class="form-check-label" for="sm_content_prog">Progressive programs for increasing flexibility</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_video" value="Video demonstrations">
+                    <label class="form-check-label" for="sm_content_video">Video demonstrations</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="sm_content_type" id="sm_content_written" value="Written instructions with images">
+                    <label class="form-check-label" for="sm_content_written">Written instructions with images</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-12">
+              <div class="survey-question-container">
+                 <label for="sm_age_range" class="survey-question-label">
+                    <i class="bi bi-person-vcard me-2"></i>
+                    Question 10: What is your age range?
+                  </label>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_age_range" id="sm_age_1825" value="18-25">
+                    <label class="form-check-label" for="sm_age_1825">18-25</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_age_range" id="sm_age_2635" value="26-35">
+                    <label class="form-check-label" for="sm_age_2635">26-35</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_age_range" id="sm_age_3645" value="36-45">
+                    <label class="form-check-label" for="sm_age_3645">36-45</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_age_range" id="sm_age_4655" value="46-55">
+                    <label class="form-check-label" for="sm_age_4655">46-55</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_age_range" id="sm_age_5665" value="56-65">
+                    <label class="form-check-label" for="sm_age_5665">56-65</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="sm_age_range" id="sm_age_66" value="66+">
+                    <label class="form-check-label" for="sm_age_66">66+</label>
+                  </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row g-4 mb-4">
+            <div class="col-md-6">
+              <div class="survey-question-container">
+                 <label for="sm_biggest_struggle" class="survey-question-label">
+                    <i class="bi bi-emoji-frown me-2"></i>
+                    Additional Feedback: What is your biggest struggle with flexibility and mobility?
+                  </label>
+                  <textarea class="form-control" id="sm_biggest_struggle" name="sm_biggest_struggle" rows="2" placeholder="Describe your main challenge..."></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="survey-question-container">
+                 <label for="sm_excited_factor" class="survey-question-label">
+                    <i class="bi bi-emoji-smile me-2"></i>
+                    What would make you excited to start a stretching routine?
+                  </label>
+                  <textarea class="form-control" id="sm_excited_factor" name="sm_excited_factor" rows="2" placeholder="What would motivate you?"></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div> <!-- End of Application Details section -->
+
+        <div class="row mt-5">
+          <div class="col-12 text-center">
+            <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+              <i class="bi bi-send me-2"></i>
+              Submit Application
+            </button>
+          </div>
+        </div>
+      </form>
+      
+      <div id="messageDiv"></div>
+    </div>
+  </div>
+
+  <script src="  https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js  "></script>
+  
+  <script>
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    window.onload = function() {
+      const stateDropdown = document.getElementById('state');
+      
+      const loadingOption = document.createElement('option');
+      loadingOption.textContent = "Loading states...";
+      loadingOption.disabled = true;
+      stateDropdown.appendChild(loadingOption);
+      
+      google.script.run.withSuccessHandler(function(states) {
+        stateDropdown.innerHTML = '<option value="">Select State</option>';
+        
+        if (states && states.length > 0) {
+          states.forEach(function(stateName) {
+            const option = document.createElement('option');
+            option.value = stateName;
+            option.textContent = stateName;
+            stateDropdown.appendChild(option);
+          });
+        }
+      }).withFailureHandler(function(error) {
+        console.error("Error fetching states: " + error.message);
+        stateDropdown.innerHTML = '<option value="">Error loading states</option>';
+      }).getIndianStates();
+      
+      if (isMobile) {
+        const inputs = document.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+          input.addEventListener('focus', function() {
+            this.style.fontSize = '16px';
+          });
+        });
+        
+        if ('vibrate' in navigator) {
+          document.getElementById('submitBtn').addEventListener('click', function() {
+            navigator.vibrate(50);
+          });
+        }
+      }
+    };
+
+    const form = document.getElementById('applicationForm');
+    const submitButton = document.getElementById('submitBtn');
+    const messageDiv = document.getElementById('messageDiv');
+
+    document.getElementById('mobile').addEventListener('input', function(e) {
+      this.value = this.value.replace(/[^0-9]/g, '');
+      if (this.value.length > 10) {
+        this.value = this.value.slice(0, 10);
+      }
+    });
+
+    const inputs = document.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+      input.addEventListener('blur', function() {
+        validateField(this);
+      });
+      
+      input.addEventListener('input', function() {
+        if (this.classList.contains('is-invalid')) {
+          this.classList.remove('is-invalid');
+        }
+        
+        if (this.value.trim()) {
+          validateField(this);
+        }
+      });
+    });
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      form.classList.remove('was-validated');
+      messageDiv.innerHTML = '';
+      
+      if (!form.checkValidity()) {
+        e.stopPropagation();
+        form.classList.add('was-validated');
+        
+        const firstInvalid = form.querySelector(':invalid');
+        if (firstInvalid) {
+          firstInvalid.focus();
+          if (isMobile) {
+            firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }
+        }
+        
+        showMessage('Please complete all required fields correctly.', 'danger');
+        return;
+      }
+      
+      const mobile = document.getElementById('mobile').value;
+      const email = document.getElementById('email').value;
+      
+      if (!validateMobile(mobile)) {
+        document.getElementById('mobile').classList.add('is-invalid');
+        showMessage('Please enter a valid 10-digit mobile number.', 'danger');
+        return;
+      }
+      
+      if (!validateEmail(email)) {
+        document.getElementById('email').classList.add('is-invalid');
+        showMessage('Please enter a valid email address.', 'danger');
+        return;
+      }
+
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<span class="spinner-border spinner-border-sm" role="status"></span>Submitting...';
+      
+      const loadingOverlay = document.createElement('div');
+      loadingOverlay.className = 'loading-overlay';
+      loadingOverlay.innerHTML = '<div class="loading-spinner"></div>';
+      document.querySelector('.form-card').style.position = 'relative';
+      document.querySelector('.form-card').appendChild(loadingOverlay);
+
+      let clientIpAddress = "N/A";
+      try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 5000);
+        
+        const ipResponse = await fetch('https://api.ipify.org  ?format=json', {
+          signal: controller.signal
+        });
+        clearTimeout(timeoutId);
+        
+        if (ipResponse.ok) {
+          const ipData = await ipResponse.json();
+          clientIpAddress = ipData.ip;
+        }
+      } catch (error) {
+        console.warn("Could not fetch IP address:", error);
+      }
+
+      const formData = {
+        name: document.getElementById('name').value.trim(),
+        mobile: document.getElementById('mobile').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        dob: document.getElementById('dob').value,
+        gender: document.getElementById('gender').value,
+        graduation: document.getElementById('graduation').value,
+        state: document.getElementById('state').value,
+        applyingFor: document.getElementById('applyingFor').value,
+        contactMethod: document.getElementById('contactMethod').value,
+        ipAddress: clientIpAddress,
+        timestamp: new Date().toISOString(),
+        // Add Stretch & Mobility Survey data
+        sm_experience: document.querySelector('input[name="sm_experience"]:checked')?.value || '',
+        sm_hours_sitting: document.querySelector('input[name="sm_hours_sitting"]:checked')?.value || '',
+        sm_body_areas: Array.from(document.querySelectorAll('input[name="sm_body_areas"]:checked')).map(cb => cb.value),
+        sm_primary_goal: document.querySelector('input[name="sm_primary_goal"]:checked')?.value || '',
+        sm_fitness_activities: Array.from(document.querySelectorAll('input[name="sm_fitness_activities"]:checked')).map(cb => cb.value),
+        sm_experienced_issues: Array.from(document.querySelectorAll('input[name="sm_experienced_issues"]:checked')).map(cb => cb.value),
+        sm_time_per_session: document.querySelector('input[name="sm_time_per_session"]:checked')?.value || '',
+        sm_barriers: Array.from(document.querySelectorAll('input[name="sm_barriers"]:checked')).map(cb => cb.value),
+        sm_content_type: Array.from(document.querySelectorAll('input[name="sm_content_type"]:checked')).map(cb => cb.value),
+        sm_age_range: document.querySelector('input[name="sm_age_range"]:checked')?.value || '',
+        sm_biggest_struggle: document.getElementById('sm_biggest_struggle').value.trim(),
+        sm_excited_factor: document.getElementById('sm_excited_factor').value.trim()
+      };
+
+      google.script.run
+        .withSuccessHandler(function(response) {
+          loadingOverlay.remove();
+          submitButton.disabled = false;
+          submitButton.innerHTML = '<i class="bi bi-send me-2"></i>Submit Application';
+          
+          if (response.status === "success") {
+            document.querySelector('.form-card').classList.add('form-submitted');
+            showMessage(response.message || 'Application submitted successfully! We will contact you soon.', 'success');
+            form.reset();
+            form.classList.remove('was-validated');
+            
+            inputs.forEach(input => {
+              input.classList.remove('is-valid', 'is-invalid');
+            });
+            
+            if (isMobile) {
+              messageDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+          } else {
+            showMessage(response.message || 'Submission failed. Please try again.', 'danger');
+          }
+        })
+        .withFailureHandler(function(error) {
+          loadingOverlay.remove();
+          submitButton.disabled = false;
+          submitButton.innerHTML = '<i class="bi bi-send me-2"></i>Submit Application';
+          showMessage('Network error. Please check your connection and try again.', 'danger');
+          console.error('Submission error:', error);
+        })
+        .submitApplication(formData);
+    });
+
+    function validateField(fieldElement) {
+      const value = fieldElement.value.trim();
+      let isValid = true;
+
+      if (fieldElement.hasAttribute('required') && !value) {
+        isValid = false;
+      } else if (fieldElement.type === 'email' && value && !validateEmail(value)) {
+        isValid = false;
+      } else if (fieldElement.type === 'tel' && value && !validateMobile(value)) {
+        isValid = false;
+      }
+
+      if (isValid) {
+        fieldElement.classList.remove('is-invalid');
+        fieldElement.classList.add('is-valid');
+      } else {
+        fieldElement.classList.remove('is-valid');
+        fieldElement.classList.add('is-invalid');
+      }
+
+      return isValid;
+    }
+
+    function validateEmail(email) {
+      const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email.toLowerCase());
+    }
+
+    function validateMobile(mobile) {
+      const re = /^\d{10}$/;
+      return re.test(mobile);
+    }
+
+    function showMessage(message, type) {
+      const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+      const icon = type === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill';
+      
+      messageDiv.innerHTML = `
+        <div class="alert ${alertClass} d-flex align-items-center" role="alert">
+          <i class="bi ${icon} me-2" style="font-size: 1.2rem;"></i>
+          <div>${message}</div>
+        </div>
+      `;
+      
+      if (type === 'success') {
+        setTimeout(() => {
+          messageDiv.innerHTML = '';
+        }, 5000);
+      }
+    }
+
+    form.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter' && e.target.tagName !== 'BUTTON') {
+        e.preventDefault();
+        const inputs = Array.from(form.querySelectorAll('input, select, textarea'));
+        const currentIndex = inputs.indexOf(e.target);
+        const nextInput = inputs[currentIndex + 1];
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      });
+
+      document.querySelectorAll('.form-section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(20px)';
+        section.style.transition = 'all 0.6s ease';
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>
